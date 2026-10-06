@@ -10,10 +10,6 @@ jobs:
   build:
     runs-on: windows-latest
 
-    defaults:
-      run:
-        working-directory: "Ombra Cremisi - progetto EXE"
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,13 +20,15 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
+        working-directory: "./Ombra Cremisi - progetto EXE"
         run: npm install
 
       - name: Build EXE
+        working-directory: "./Ombra Cremisi - progetto EXE"
         run: npx electron-builder --win
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
         with:
           name: OmbraCremisi-exe
-          path: "Ombra Cremisi - progetto EXE/dist/*"
+          path: "./Ombra Cremisi - progetto EXE/dist/*"
